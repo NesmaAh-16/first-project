@@ -1,0 +1,48 @@
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<nav class="navbar navbar-dark bg-dark px-4 mb-4">
+    <h4 class="text-white">Welcome, {{user.first_name}} {{user.last_name}}!</h4>
+    <div>
+        <a href="/logout" class="btn btn-outline-light btn-sm">Logout</a>
+    </div>
+</nav>
+{% if messages %}
+    {% for m in messages %}
+        <p class="text-danger mt-1 small">{{m}}</p>
+    {% endfor %}
+{% endif %}
+<div class="container mt-5">
+    <div class="row">
+        <!-- Details and Edit Form -->
+        <div class="col-md-6">
+            {% if game.created_by.id == user.id %}
+                <form action="/games/{{game.id}}/update" method="POST">
+                    {% csrf_token %}
+                    <label>Game Name</label>
+                    <input type="text" name="name"  value="{{game.name}}" class="h3 form-control mb-2" required>
+                    <br>
+                    <label>Genre</label>
+                    <select class="form-select form-select-sm mb-3" value="{{game.genre}}" name="genre" required>
+                    <option value="Action">Action</option>
+                    <option value="RGP">RGP</option>
+                    <option value="Arcade">Arcade</option>
+                    <option value="Strategy">Strategy</option>
+                    <option value="Tactical_shooter">Tactical shooter</option>
+                    <option value="Adventure">Adventure</option>
+                </select>
+                <br>
+                <label>Release Date</label>
+                <input type="date" name="release_date" value="{{game.release_date}}" required>
+                <br>
+                <br>
+                <label>Description</label>
+                <textarea name="desc" class="form-control mb-3" rows="4" value="{{game.desc}}"required></textarea>
+                    <button class="btn btn-warning">Apply</button>
+                    <a href="/games/{{game.id}}" class="btn btn-info">Cancel</a>
+                </form>
+                
+            {% endif %}
+        </div>
+    </div>
+</div>

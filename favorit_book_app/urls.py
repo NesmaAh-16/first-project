@@ -8,19 +8,24 @@ urlpatterns = [
     path('login', views.login),
     path('logout', views.logout),
 
-    # Main Books Dashboard
-    path('books', views.books),
-    path('books/create', views.create_book),
+    # Main Games Dashboard
+    path('dashboard', views.games),
+    path('games/create', views.create_game),
 
     # Book Details, Update, and Delete
-    path('books/<int:book_id>', views.show_book),
-    path('books/<int:book_id>/update', views.update_book),
-    path('books/<int:book_id>/delete', views.delete_book),
+    path('games/<int:game_id>', views.show_game),
+    path('games/<int:game_id>/edit', views.edit_game), #show edit page
+    path('games/<int:game_id>/update', views.update_game), #actual editing
+    path('games/<int:game_id>/delete', views.delete_game),
+
+
+
+
 
     # Favorite Actions
-    path('books/<int:book_id>/favorite', views.favorite),
-    path('books/<int:book_id>/unfavorite', views.unfavorite),
+    #path('books/<int:book_id>/favorite', views.favorite),
+   # path('books/<int:book_id>/unfavorite', views.unfavorite),
 
     # SENSEI BONUS: User's Favorites Page
-    path('user/favorites', views.my_favorites),
+   # path('user/favorites', views.my_favorites),
 ]
